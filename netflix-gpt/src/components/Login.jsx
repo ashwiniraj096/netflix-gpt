@@ -38,12 +38,12 @@ const Login = () => {
   return (
     <>
       <Logo />
-      <div className="absolute">
+      <div className="absolute w-full">
         <img src={SIGN_IN_BG_IMAGE} alt="Sign-In BG-Image" />
       </div>
       <form
         onSubmit={(e) => handleSubmit(e)}
-        className="bg-white absolute w-4/12 p-12 mx-auto my-36 right-0 left-0 bg-black bg-opacity-80 text-white"
+        className=" absolute w-4/12 p-12 mx-auto my-36 right-0 left-0 bg-black bg-opacity-80 text-white"
       >
         <h1 className="text-white font-bold text-3xl mb-4">
           {isSignIn ? "Sign In" : "Sign Up"}
