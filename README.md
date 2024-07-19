@@ -1,6 +1,7 @@
 # netflix-gpt
 
 Basic Netflix UI-clone with GPT
+Hosting URL: https://netflix-gpt-f011a.web.app
 
 # Features it has are:
 
@@ -23,3 +24,12 @@ Basic Netflix UI-clone with GPT
 - handle sign out using signOut api from firebase
 - onAuthStateChanged handles the routing between login and home page
 - As onAuthStateChanged is an event listner cleaning it up when component unmounts via useEffect()'s return function
+- Sign UP in TMDB and create an app to get access key under API
+- docs - get data from API of now playing section
+- key: 71e0596ae225f27dab23287cc30f6cbf
+- token: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MWUwNTk2YWUyMjVmMjdkYWIyMzI4N2NjMzBmNmNiZiIsIm5iZiI6MTcyMTM4NTE3Ni4zNjY4NzYsInN1YiI6IjY2OWEzZDJlZjQ0NDVjMDFkOGMxYTgzMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Avw33WD72hcqJbDP8LtGpAtKkXCxZ-DfMuBjM3NMLSU
+
+Browse Page
+-PromotionalMovie Container - Movie Title - movie des - buttons
+
+- MoviesListContainer
