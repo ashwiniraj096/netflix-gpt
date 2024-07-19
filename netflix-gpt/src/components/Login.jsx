@@ -1,12 +1,20 @@
 import { useRef, useState } from "react";
 import { SIGN_IN_BG_IMAGE } from "../utils/constants";
-import Logo from "./Logo";
 import { validate } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { modifyErrorCode } from "../utils/commonFunctions";
+import Header from "./Header";
 
 const Login = () => {
   const [isSignIn, setSignIn] = useState(true);
-  //error => [{type:"email", message:"errorMessage"}] => error.find(ele => ele.type === "error")
   const [errors, setErrors] = useState(null);
+  const [authError, setAuthError] = useState(null);
+  const [authSuccess, setAuthSuccess] = useState(null);
   const email = useRef(null);
   const password = useRef(null);
   const userName = useRef(null);
@@ -17,27 +25,63 @@ const Login = () => {
 
   const handleFormValidation = () => {
     let errorsObject = {};
+    const emailValue = email.current.value;
+    const passwordValue = password.current.value;
     if (isSignIn) {
+      //Sign In setup
       errorsObject = validate({
-        email: email.current.value,
-        password: password.current.value,
+        email: emailValue,
+        password: passwordValue,
       });
+      signInWithEmailAndPassword(auth, emailValue, passwordValue)
+        .then((userCredential) => {
+          // Signed in
+          setAuthError(null);
+          setAuthSuccess("User Signed In Successfully");
+        })
+        .catch((error) => {
+          setAuthError(modifyErrorCode(error.code));
+          setAuthSuccess(null);
+        });
     } else {
+      //Sign Up setup
       errorsObject = validate(
         {
-          email: email.current.value,
-          password: password.current.value,
+          email: emailValue,
+          password: passwordValue,
           userName: userName.current.value,
         },
         true
       );
+      setErrors(errorsObject);
+      createUserWithEmailAndPassword(auth, emailValue, passwordValue)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          updateProfile(user, {
+            displayName: userName.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/12824231?v=4",
+          })
+            .then(() => {
+              console.info("User SignedIn");
+            })
+            .catch((error) => {
+              console.error("Error during SignUp", error.code);
+              //  setErrorMessage(error.message);
+            });
+          setAuthError(null);
+          setAuthSuccess("User Signed Up Successfully");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          setAuthSuccess(null);
+          setAuthError(modifyErrorCode(errorCode));
+        });
     }
-    setErrors(errorsObject);
   };
 
   return (
     <>
-      <Logo />
+      <Header />
       <div className="absolute w-full">
         <img src={SIGN_IN_BG_IMAGE} alt="Sign-In BG-Image" />
       </div>
@@ -90,12 +134,22 @@ const Login = () => {
         >
           {isSignIn ? "Sign In" : "Sign Up"}
         </button>
+        {authError && (
+          <p className="text-red-600 text-sm font-semibold">{authError}</p>
+        )}
+        {authSuccess && (
+          <p className="text-green-500 text-sm font-semibold">{authSuccess}</p>
+        )}
         {isSignIn ? (
           <h3 className="m-2">
             New to Netflix?
             <span
               className=" hover:underline underline-offset-4"
-              onClick={() => setSignIn(false)}
+              onClick={() => {
+                setSignIn(false);
+                setAuthError(null);
+                setAuthSuccess(null);
+              }}
             >
               {" "}
               Sign Up now!!
@@ -106,7 +160,11 @@ const Login = () => {
             Already a user?
             <span
               className=" hover:underline underline-offset-4"
-              onClick={() => setSignIn(true)}
+              onClick={() => {
+                setSignIn(true);
+                setAuthError(null);
+                setAuthSuccess(null);
+              }}
             >
               {" "}
               Sign In now!!
