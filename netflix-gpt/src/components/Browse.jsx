@@ -1,13 +1,25 @@
 import { useEffect } from "react";
-import { API_OPTIONS } from "../utils/constants";
 import MoviesListContainer from "./MoviesListContainer";
 import PromotionalMovieContainer from "./PromotionalMovieContainer";
-import { useDispatch, useSelector } from "react-redux";
-import { addNowPlayingMoviesList } from "../slices/moviesSlice";
-import useNowPlayingMoviesList from "../hooks/useNowPlayingMoviesList";
+import { useSelector } from "react-redux";
+import useMoviesList from "../hooks/useMoviesList";
+import {
+  NOW_PLAYING,
+  NOW_PLAYING_MOVIES,
+  POPULAR,
+  POPULAR_MOVIES,
+  TOP_RATED,
+  TOP_RATED_MOVIES,
+  UPCOMING,
+  UPCOMING_MOVIES,
+} from "../utils/constants";
 
 const BrowsePage = () => {
-  useNowPlayingMoviesList();
+  useMoviesList(NOW_PLAYING, NOW_PLAYING_MOVIES);
+  useMoviesList(TOP_RATED, TOP_RATED_MOVIES);
+  useMoviesList(POPULAR, POPULAR_MOVIES);
+  useMoviesList(UPCOMING, UPCOMING_MOVIES);
+
   const movies = useSelector((state) => state.movies?.nowPlayingMoviesList);
 
   //Add Shimmer UI here

@@ -15,3 +15,16 @@ export const API_OPTIONS = {
       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MWUwNTk2YWUyMjVmMjdkYWIyMzI4N2NjMzBmNmNiZiIsIm5iZiI6MTcyMTM4NTI1OC45MTQ5NTYsInN1YiI6IjY2OWEzZDJlZjQ0NDVjMDFkOGMxYTgzMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oGsVa-XgZHI244gJamBY3iHbb4GZpLOMTpyh6EhN0bs",
   },
 };
+
+export const TMDB_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
+
+export const NOW_PLAYING = "now_playing";
+export const NOW_PLAYING_MOVIES = "nowPlayingMoviesList";
+export const POPULAR = "popular";
+export const POPULAR_MOVIES = "popularMoviesList";
+
+export const TOP_RATED = "top_rated";
+export const TOP_RATED_MOVIES = "topRatedMoviesList";
+
+export const UPCOMING = "upcoming";
+export const UPCOMING_MOVIES = "upcomingMoviesList";
