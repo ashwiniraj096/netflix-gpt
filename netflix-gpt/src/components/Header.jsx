@@ -34,10 +34,10 @@ const Header = () => {
             photoURL: photoURL,
           })
         );
-        navigate("/");
+        navigate("/browse");
       } else {
         // User is signed out
-        navigate("/login");
+        navigate("/");
       }
     });
     return () => unsubscribe();

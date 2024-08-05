@@ -11,11 +11,11 @@ import { Provider } from "react-redux";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/browse",
     element: <App />,
   },
   {
-    path: "/login",
+    path: "/",
     element: <Login />,
   },
 ]);
