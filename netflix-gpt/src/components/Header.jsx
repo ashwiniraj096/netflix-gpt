@@ -3,8 +3,8 @@ import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { NETFLIX_LOGO, USER_ICON } from "../utils/constants";
-import { useEffect } from "react";
 import { addUser, removeUser } from "../slices/userSlice";
+import { useEffect } from "react";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
